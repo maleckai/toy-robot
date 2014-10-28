@@ -31,6 +31,7 @@ TOY ROBOT
   | left               | Rotates the robot 90 degrees to the left.                                 |
   | right              | Rotates the robot 90 degrees to the right.                                |
   | report             | Announces the X,Y and FACING of the robot.                                |
+  | help               | Shows this help menu.                                                     |
   *------------------------------------------------------------------------------------------------*
 
   FACINGS: #{FACINGS.to_s}

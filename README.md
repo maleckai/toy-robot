@@ -35,6 +35,7 @@ to launch the Toy Robot program.
 | `left`                | Rotates the robot 90 degrees to the left.                                 |
 | `right`               | Rotates the robot 90 degrees to the left.                                 |
 | `report`              | Announces the X,Y and FACING of the robot.                                |
+| `help`                | Shows a help menu detailing available commands.                           |
 
 ## Contributing
 
