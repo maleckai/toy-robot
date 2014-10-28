@@ -12,6 +12,7 @@ module ToyRobot
     PLACE_ERROR_MESSAGE = "X must be within 1-#{ToyRobot::TABLE_WIDTH}, " +
         "Y must be within 1-#{ToyRobot::TABLE_HEIGHT}, " +
         "FACING must be one of #{FACINGS.to_s}"
+    MOVE_ERROR_MESSAGE = "The Robot would exceed the table limit of #{ToyRobot::TABLE_WIDTH}x#{ToyRobot::TABLE_HEIGHT}"
 
     # Methods
 
@@ -22,10 +23,22 @@ module ToyRobot
       @facing = facing
     end
 
+    def move
+      new_x = @x + Math.cos(facing_angle * Math::PI / 180).round
+      new_y = @y + Math.sin(facing_angle * Math::PI / 180).round
+      return MOVE_ERROR_MESSAGE unless valid_move?(new_x, new_y)
+      @x = new_x
+      @y = new_y
+    end
+
     # Validation methods
 
     def valid_place?(x, y, facing)
       valid_x?(x) && valid_y?(y) && valid_facing?(facing)
+    end
+
+    def valid_move?(x, y)
+      valid_x?(x) && valid_y?(y)
     end
 
     def valid_x?(x)
@@ -38,6 +51,16 @@ module ToyRobot
 
     def valid_facing?(facing)
       FACINGS.include? facing.upcase
+    end
+
+    private
+
+    def facing_index
+      FACINGS.index(facing)
+    end
+
+    def facing_angle
+      facing_index * 90
     end
 
   end
