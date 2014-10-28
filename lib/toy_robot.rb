@@ -31,6 +31,29 @@ module ToyRobot
       @y = new_y
     end
 
+    def right(units = 1)
+      turn(-units)
+    end
+
+    def left(units = 1)
+      turn(units)
+    end
+
+    private
+
+    def facing_index
+      FACINGS.index(facing)
+    end
+
+    def facing_angle
+      facing_index * 90
+    end
+
+    def turn(units)
+      new_facing_index = (facing_index + units) % 4
+      @facing = FACINGS[new_facing_index]
+    end
+
     # Validation methods
 
     def valid_place?(x, y, facing)
@@ -51,16 +74,6 @@ module ToyRobot
 
     def valid_facing?(facing)
       FACINGS.include? facing.upcase
-    end
-
-    private
-
-    def facing_index
-      FACINGS.index(facing)
-    end
-
-    def facing_angle
-      facing_index * 90
     end
 
   end
