@@ -39,6 +39,10 @@ module ToyRobot
       turn(units)
     end
 
+    def report
+      "The robot currently at (#{@x}, #{@y}) facing #{@facing}"
+    end
+
     private
 
     def facing_index

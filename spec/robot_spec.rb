@@ -96,11 +96,11 @@ describe ToyRobot::Robot do
     end
 
     it 'should report its current x position' do
-      expect(robot.report).to include(@original_x)
+      expect(robot.report).to include(@original_x.to_s)
     end
 
     it 'should report its current y position' do
-      expect(robot.report).to include(@original_y)
+      expect(robot.report).to include(@original_y.to_s)
     end
 
     it 'should report its current facing' do
