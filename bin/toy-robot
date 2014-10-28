@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+
+require 'toy_robot'
+
+robot = ToyRobot::Robot.new
+
+print 'toy-robot> '
+
+while input = gets
+  puts robot.instance_eval(input) unless input.to_s.empty?
+  print 'toy-robot> '
+end
+
+print "\n"

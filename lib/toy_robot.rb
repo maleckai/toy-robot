@@ -9,10 +9,33 @@ module ToyRobot
     attr_reader :x, :y, :facing
 
     FACINGS = %w(EAST NORTH WEST SOUTH)
+    EAST = 'EAST'
+    NORTH = 'NORTH'
+    WEST = 'WEST'
+    SOUTH = 'SOUTH'
+
     PLACE_ERROR_MESSAGE = "X must be within 1-#{ToyRobot::TABLE_WIDTH}, " +
         "Y must be within 1-#{ToyRobot::TABLE_HEIGHT}, " +
         "FACING must be one of #{FACINGS.to_s}"
     MOVE_ERROR_MESSAGE = "The Robot would exceed the table limit of #{ToyRobot::TABLE_WIDTH}x#{ToyRobot::TABLE_HEIGHT}"
+    HELP_TEXT = %Q{
+TOY ROBOT
+
+  A toy robot that can be placed on a table top, move across it, rotate and report its position
+
+  *------------------------------------------------------------------------------------------------*
+  | COMMAND            | DESCRIPTION                                                               |
+  |--------------------|---------------------------------------------------------------------------|
+  | place X, Y, FACING | Places the robot at coordinates X, Y on the table, with facing FACING.    |
+  | move               | Moves the robot one unit forward in the direction it is currently facing. |
+  | left               | Rotates the robot 90 degrees to the left.                                 |
+  | right              | Rotates the robot 90 degrees to the right.                                |
+  | report             | Announces the X,Y and FACING of the robot.                                |
+  *------------------------------------------------------------------------------------------------*
+
+  FACINGS: #{FACINGS.to_s}
+  X range: 1-#{ToyRobot::TABLE_WIDTH}
+  Y range: 1-#{ToyRobot::TABLE_HEIGHT}}
 
     # Methods
 
@@ -21,6 +44,7 @@ module ToyRobot
       @x = x
       @y = y
       @facing = facing
+      return
     end
 
     def move
@@ -29,6 +53,7 @@ module ToyRobot
       return MOVE_ERROR_MESSAGE unless valid_move?(new_x, new_y)
       @x = new_x
       @y = new_y
+      return
     end
 
     def right(units = 1)
@@ -41,6 +66,10 @@ module ToyRobot
 
     def report
       "The robot currently at (#{@x}, #{@y}) facing #{@facing}"
+    end
+
+    def help
+      HELP_TEXT
     end
 
     private
@@ -56,6 +85,7 @@ module ToyRobot
     def turn(units)
       new_facing_index = (facing_index + units) % 4
       @facing = FACINGS[new_facing_index]
+      return
     end
 
     # Validation methods
