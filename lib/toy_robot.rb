@@ -1,5 +1,7 @@
 require "toy_robot/version"
 
 module ToyRobot
-  # Your code goes here...
+  class Robot
+
+  end
 end
